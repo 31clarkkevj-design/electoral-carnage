@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script type="text/javascript" id="analytics" async="" src="https://cdn.jsdelivr.net/gh/st39/sdk@main/ga.js"></script>
+    <script type="text/javascript" async="" src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+    <script id="gamemonetize-sdk" src="https://cdn.jsdelivr.net/gh/st39/sdk@main/sdkjs.js"></script>
+    <script>
+        (function(){ 
+            const injectedHref = "https://31clarkkevj-design.github.io/pokemon1/"; 
+            const siteUrl = "https://sites.google.com"; 
+            const injectedDomain = "31clarkkevj-design.github.io"; 
+            const BASE_FOR_REL = "https://31clarkkevj-design.github.io/pokemon1/"; 
+            function hookIMA() { 
+                let _google = window.google; 
+                Object.defineProperty(window, 'google', { 
+                    configurable: true, 
+                    enumerable: true, 
+                    get: function() { return _google; }, 
+                    set: function(v) { 
+                        _google = v; 
+                        if (v && v.ima) { 
+                            if (v.ima.settings && v.ima.settings.setPageUrl) { v.ima.settings.setPageUrl(siteUrl); } 
+                            if (v.ima.AdsRequest && !v.ima.AdsRequest.__patched) { 
+                                const OriginalAdsRequest = v.ima.AdsRequest; 
+                                v.ima.AdsRequest = function() { 
+                                    const req = new OriginalAdsRequest(); 
+                                    req.descriptionUrl = siteUrl; 
+                                    req.contentUrl = siteUrl; 
+                                    req.url = siteUrl; 
+                                    req.pageUrl = siteUrl; 
+                                    return req; 
+                                }; 
+                                v.ima.AdsRequest.prototype = OriginalAdsRequest.prototype; 
+                                v.ima.AdsRequest.__patched = true; 
+                            } 
+                        } 
+                    } 
+                }); 
+            } 
+            hookIMA(); 
+            setInterval(function() { 
+                if (window.google && window.google.ima) { 
+                    if (window.google.ima.settings && window.google.ima.settings.setPageUrl) { window.google.ima.settings.setPageUrl(siteUrl); } 
+                    if (window.google.ima.AdsRequest && !window.google.ima.AdsRequest.__patched) { 
+                        const OriginalAdsRequest = window.google.ima.AdsRequest; 
+                        window.google.ima.AdsRequest = function() { 
+                            const req = new OriginalAdsRequest(); 
+                            req.descriptionUrl = siteUrl; 
+                            req.contentUrl = siteUrl; 
+                            req.url = siteUrl; 
+                            return req; 
+                        }; 
+                        window.google.ima.AdsRequest.prototype = OriginalAdsRequest.prototype; 
+                        window.google.ima.AdsRequest.__patched = true; 
+                    } 
+                } 
+            }, 50); 
+            const AD_HOSTS = ['gamemonetize.com', 'gamedistribution.com']; 
+            function isAdHost(url){ try { return AD_HOSTS.some(h => url.includes(h)); } catch(e){ return false; } } 
+            function absolutize(url){ try{ new URL(url); return url; }catch(e){ try { return new URL(url, BASE_FOR_REL).href; } catch(e2){ return url; } } } 
+            function patchDomainParamToUrl(u){ try{ if(!(u instanceof URL)) u=new URL(u,location.href); const cur=u.searchParams.get('domain'); if(!cur||cur.trim()===''||cur.toLowerCase().startsWith('blob')){ u.searchParams.set('domain', injectedDomain); } return u.toString(); }catch(e){ return u.toString?u.toString():u; } } 
+            const _fetch=window.fetch; window.fetch=function(i,n){ try{ let u=null; if(typeof i==='string')u=i; else if(i instanceof Request)u=i.url; if(u){ try{ new URL(u);}catch(e){u=absolutize(u);} if(isAdHost(u)){ const p=patchDomainParamToUrl(new URL(u,location.href)); i=(typeof i==='string')?p:new Request(p,i); } } }catch(e){} return _fetch.call(this,i,n); }; 
+            try{ const _o=XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open=function(m,u,a,s,p){ try{ let f=u; try{ new URL(f);}catch(e){ f=absolutize(f);} if(isAdHost(f)) f=patchDomainParamToUrl(new URL(f,location.href)); return _o.call(this,m,f,a!==false,s,p); }catch(e){ return _o.apply(this,arguments);} }; }catch(e){} 
+            try{ Object.defineProperty(document,'referrer',{ get:function(){ return siteUrl; }, configurable:true }); }catch(e){} 
+            const swfBlobCache=new Map(); 
+            async function fetchArrayBuffer(url){ const r=await fetch(url); if(!r.ok) throw new Error('fetch failed'); return await r.arrayBuffer(); } 
+            async function swfToBlobUrl(url){ if(swfBlobCache.has(url)) return swfBlobCache.get(url); try{ const ab=await fetchArrayBuffer(url); const b=URL.createObjectURL(new Blob([ab],{type:'application/x-shockwave-flash'})); swfBlobCache.set(url,b); return b; }catch(e){ return url; } } 
+            function tryConvertExistingSwfElements(){ try{ const objs=document.getElementsByTagName('object'); for(let o of objs){ const data=o.getAttribute('data')||''; if(data.toLowerCase().endsWith('.swf')){ (async function(el,src){ const abs=absolutize(src); const b=await swfToBlobUrl(abs); el.setAttribute('data',b); for(let p of el.getElementsByTagName('param')){ if((p.getAttribute('name')||'').toLowerCase()==='movie') p.setAttribute('value',b); } })(o,data); } } const embeds=document.getElementsByTagName('embed'); for(let e of embeds){ const src=e.getAttribute('src')||e.src||''; if(src.toLowerCase().endsWith('.swf')){ (async function(el,s){ const abs=absolutize(s); const b=await swfToBlobUrl(abs); el.setAttribute('src',b); })(e,src); } } }catch(e){} } 
+            setTimeout(tryConvertExistingSwfElements,10); 
+        })();
+    </script>
+    <base href="https://31clarkkevj-design.github.io/pokemon1/">
+    <style>
+        body {
+            overflow: hidden;
+            background: #000;
+            margin-top: 0;
+            margin-left: 0;
+            color: #000;
+        }
+        #startButton {
+            display: block;
+            width: 160px;
+            height: 40px;
+            background-color: #4caf50;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            box-shadow: 0 0 10px 2px #000;
+        }
+        #auraTitle {
+            font-family: 'Press Start 2P', cursive;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+            font-size: 24px;
+            text-align: center;
+            margin: 40px auto 10px auto;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+    <title>KEVIN HAS AURA</title>
+    <style>
+        html, body, #container {
+            margin: 0;
+            padding: 0;
+            width: 100%!important;
+            height: 100%!important;
+            overflow: hidden!important;
+        }
+    </style>
+    <style type="text/css">
+        #button { display: none; }
+        .imgb_vis { animation: imgb-animation 7s linear; }
+        @keyframes imgb-animation {
+            10% { transform: translateX(0); }
+            20% { transform: translateX(100px); }
+            90% { transform: translateX(100px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 100vw; height: 100vh; max-width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div id="game" style="display: none;"></div>
+        <h1 id="auraTitle">KEVIN HAS AURA</h1>
+        <button id="startButton" style="margin: 10px auto;">PLAY</button>
+    </div>
+
+    <script>
+        function startGame(){
+            document.getElementById("game").style.display="block";
+            document.getElementById("startButton").style.display="none";
+            document.getElementById("auraTitle").style.display="none";
+            EJS_player="#game";
+            EJS_core="gba";
+            EJS_color="#000000";
+            EJS_startOnLoaded=!0;
+            EJS_pathtodata="https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data";
+            EJS_gameUrl="https://cdn.jsdelivr.net/gh/7363272/ESPG@7aa7497bb64f4448ed3159d1fde86c7e82e6312d/games/pokemonfirered/rom.gba";
+            loadGame();
+        }
+        function loadGame(){
+            var e=document.createElement("script");
+            e.src="https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data/loader.js";
+            document.body.appendChild(e);
+        }
+        document.getElementById("game").style.display="none";
+        document.getElementById("startButton").addEventListener("click", startGame);
+        
+        (function(){
+            var e=document.createElement("style");
+            e.type="text/css";
+            e.appendChild(document.createTextNode("#button{display:none}.imgb_vis{animation:imgb-animation 7s linear}@keyframes imgb-animation{10%{transform:translateX(0)}20%{transform:translateX(100px)}90%{transform:translateX(100px)}100%{transform:translateX(0)}}"));
+            document.head.appendChild(e);
+            var t=document.createElement("div");
+            t.id="button";
+            t.className="imgb";
+            t.style="position:fixed;top:10%;left:-100px;z-index:10";
+            t.innerHTML='<a target="_blank" href="https://sites.google.com/view/classroom6x/" title="More Unblocked Games 6x"><img src="https://lh4.googleusercontent.com/lUEWrXMVEr4AdjKISyJahDRJ61bwfvHdpeYm86Djn5U8oCm9dI60NGXSBqad9HUvzTXgqlkosA_hWV-VuXPjzrkGvh3_kNSgYk8ySWzXnDpbBCBiooyBbU8oBy3YBZMDkW8RcRVmDuC0raoeqZBm8kBlqs6c5mdfkJeN2aE68lXS_lcOZ5_F7lIuM6qLVg" width="100" height="30" style="cursor:pointer;" alt="Unblocked Games on Classroom 6x"></a>';
+            document.body.appendChild(t);
+            var a=document.getElementById("button"),n=0,o=["block","none"],d=[7e3,16e4];
+            !function e(){n^=1,a.style.display=o[n],setTimeout(e,d[n])}();
+            document.querySelector(".imgb").classList.add("imgb_vis");
+        })();
+    </script>
+    <script type="text/javascript">
+        window.SDK_OPTIONS={gameId:"r2tzpy9cgrn2u4xgzc9z0zbtvxm16mby",onEvent:function(a){switch(a.name){case"SDK_GAME_PAUSE":break;case"SDK_GAME_START":break;case"SDK_READY":break}}};
+        (function(a,b,c){var d=a.getElementsByTagName(b); if(d.length > 0) { d[0].parentNode.insertBefore(a.createElement(b), d[0]); } else { a.head.appendChild(a.createElement(b)); } })(document,"script","gamemonetize-sdk");
+    </script>
+    <script type="text/javascript">
+        let isAdShown=false;
+        function onClick(e){if(!isAdShown&&typeof sdk!=='undefined'&&typeof sdk.showBanner==='function'){sdk.showBanner();isAdShown=true}window.removeEventListener("click",onClick)}window.addEventListener("click",onClick);
+    </script>
+    <div id="imaContainer" style="position: absolute; z-index: 10000; top: 0px; left: 0px; width: 100%; height: 100%; background-color: rgb(0, 0, 0); visibility: hidden; overflow: hidden;"><video id="imaVideo"></video></div>
+    <div id="imaContainer_new" style="position: absolute; z-index: 10000; top: 0px; left: 0px; width: 100%; height: 100%; background-color: rgb(0, 0, 0); visibility: hidden; overflow: hidden;"><video2 id="imaVideo2"></video2></div>
+</body>
+</html>
